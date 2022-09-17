@@ -39,7 +39,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{route('login')}}">{{Auth::user()->role}}</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{route('login')}}">Профиль</a>
+                            <a class="dropdown-item" href="{{route('logout')}}">Профиль</a>
                             <a class="dropdown-item" href="{{route('logout')}}">Выйти</a>
                         </div>
                     </div>

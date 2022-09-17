@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
+
 
     public function showLoginForm()
     {
@@ -19,6 +19,7 @@ class AuthController extends Controller
     {
         $data = $request->validate([
             "phoneNumber" => ["required"],
+            "role" => ["required"],
             "password" => ["required", "min:6"]
         ]);
 
@@ -26,13 +27,13 @@ class AuthController extends Controller
             return redirect(("/"));
         }
 
-        return redirect(route("login"))->withErrors(["email" => "Пользователь не найден, либо данные введены не правильно"]);
+        return redirect(route("login"))->withErrors(["phoneNumber" => "Пользователь не найден, либо данные введены не правильно"]);
     }
 
     public function logout()
     {
         auth("web")->logout();
-        return redirect(route("checkPhoneNumberExist"));
+        return redirect(route("login"));
     }
 
     public function showRegisterForm()

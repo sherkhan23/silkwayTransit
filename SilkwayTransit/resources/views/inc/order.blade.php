@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@include("inc.header")
 <div class="container-fluid pb-3 mt-3">
     <div class="row">
         <div class="col-md-3">
@@ -13,32 +13,30 @@
 
                     <div class="nav nav-tabs d-block ml-3 flex-column" id="nav-tab" role="tablist">
 
-                    <li>
-                        @if(Auth::user()->role == 'admin')
-                                <a href="{{ route('order') }}">
-                                    <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit"  class="nav-link active w-100 text-white" id="createOrder" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                                        Создать заказ
-                                    </button>
-                                </a>
-                        @elseif(Auth::user()->role != 'admin')
-                            <p>nothing</p>
-                        @endif
+                        <li>
+                            @if(Auth::user()->role == 'admin')
+                                <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit"  class="nav-link active w-100 text-white" id="createOrder" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                                    Создать заказ
+                                </button>
+                            @elseif(Auth::user()->role != 'admin')
+                                <p>nothing</p>
+                            @endif
 
-                    </li>
+                        </li>
 
-                    <li>
+                        <li>
                             <button class="nav-link w-100 text-dark" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                    </li>
-                    <li>
+                        </li>
+                        <li>
                             <button class="nav-link w-100 text-dark" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
 
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link text-dark">
-                            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                            Customers
-                        </a>
-                    </li>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-dark">
+                                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                                Customers
+                            </a>
+                        </li>
                     </div>
                 </ul>
                 <hr>
@@ -63,13 +61,21 @@
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="createOrder">
 
                     <form class="form-control bg-light">
-
-                        <li class="mb-1">
                             <p class="text-muted">Локоматив</p>
-                            <select class="form-select" aria-label="Default select example">
-
+                            <select class="form-select w-25" aria-label="Default select example">
+                                @foreach($paths as $path)
+                                    <option {{$path->locomativeNum  }}>{{$path->locomativeNum  }}</option>
+                                @endforeach
                             </select>
-                        </li>
+
+                        <p class="text-muted">Локоматив</p>
+                        <select class="form-select w-25" aria-label="Default select example">
+                            @foreach($users as $user)
+                                <option value="{{$user->name}}">{{$user->name}}</option>
+                            @endforeach
+                        </select>
+
+
 
                     </form>
                 </div>
@@ -80,5 +86,4 @@
         </div>
     </div>
 </div>
-
 

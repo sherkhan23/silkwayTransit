@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('/');
 
 Route::middleware("auth:web")->group(function () {
+    Route::any('/profile',[\App\Http\Controllers\AuthController::class, 'showProfile'])->name('profile');
+    Route::post('/profile', [\App\Http\Controllers\AuthController::class, 'editProfile'])->name('editProfile');
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     // Route::post('/posts/comment/{id}', [\App\Http\Controllers\PostController::class, 'comment'])->name('comment');
 });
@@ -29,3 +31,8 @@ Route::middleware("guest:web")->group(function () {
     Route::get('/register', [\App\Http\Controllers\AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('/register_process', [\App\Http\Controllers\AuthController::class, 'register'])->name('register_process');
 });
+
+
+Route::any('/order',[\App\Http\Controllers\Paths::class, 'order'])->name('order');
+
+
