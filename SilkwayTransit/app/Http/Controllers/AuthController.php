@@ -37,7 +37,14 @@ class AuthController extends Controller
 
     public function showRegisterForm()
     {
-        return view("auth.register");
+        $users = User::query();
+
+        $user = $users
+            ->join('stations', function ($join) {
+                $join->on('users.station_id', '=', 'stations.id');
+            })->paginate();
+
+        return view('auth.register', compact('user'));
     }
 
     public function showForgotForm()
@@ -45,28 +52,22 @@ class AuthController extends Controller
         return view("auth.forgot");
     }
 
-    //  public function userData(){
-    //        $data = User::orderBy('id')->take(1)->get();
-    //        return view('/', [
-    //            'User' => $data,
-    //
-    //            ]);
-    //    }
-
 
     public function register(Request $request)
     {
+
         $data = $request->validate([
             "name" => ["required", "string"],
             "phoneNumber" => ["required", "string", "unique:users,phoneNumber"],
-            "farmer" => ['required'],
+            "role" => ['required'],
             "password" => ["required", "confirmed"]
         ]);
+
 
         $user = User::create([
             "name" => $data["name"],
             "phoneNumber" => $data["phoneNumber"],
-            "farmer" => $data["farmer"],
+            "role" => $data["role"],
             "password" => bcrypt($data["password"])
         ]);
 
