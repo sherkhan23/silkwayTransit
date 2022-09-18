@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Locamatives;
+use App\Models\Locomatives;
 use Illuminate\Http\Request;
 
 class LocamativesController extends Controller
@@ -41,10 +41,10 @@ class LocamativesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Locamatives  $locamatives
+     * @param  \App\Models\Locomatives  $locamatives
      * @return \Illuminate\Http\Response
      */
-    public function show(Locamatives $locamatives)
+    public function show(Locomatives $locamatives)
     {
         //
     }
@@ -52,10 +52,10 @@ class LocamativesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Locamatives  $locamatives
+     * @param  \App\Models\Locomatives  $locamatives
      * @return \Illuminate\Http\Response
      */
-    public function edit(Locamatives $locamatives)
+    public function edit(Locomatives $locamatives)
     {
         //
     }
@@ -64,10 +64,10 @@ class LocamativesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Locamatives  $locamatives
+     * @param  \App\Models\Locomatives  $locamatives
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Locamatives $locamatives)
+    public function update(Request $request, Locomatives $locamatives)
     {
         //
     }
@@ -75,10 +75,10 @@ class LocamativesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Locamatives  $locamatives
+     * @param  \App\Models\Locomatives  $locamatives
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Locamatives $locamatives)
+    public function destroy(Locomatives $locamatives)
     {
         //
     }

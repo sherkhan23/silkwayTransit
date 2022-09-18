@@ -19,7 +19,9 @@
                                     Создать заказ
                                 </button>
                             @elseif(Auth::user()->role != 'admin')
-                                <p>nothing</p>
+                                <p></p>
+                            @else
+
                             @endif
 
                         </li>
@@ -60,24 +62,98 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="createOrder">
 
-                    <form class="form-control bg-light">
+                    <form action="{{route('order_process')}}" method="POST" class="form-control bg-light">
+                    @csrf <!-- {{ csrf_field() }} -->
+
                             <p class="text-muted">Локоматив</p>
-                            <select class="form-select w-25" aria-label="Default select example">
-                                @foreach($paths as $path)
-                                    <option {{$path->locomativeNum  }}>{{$path->locomativeNum  }}</option>
+                            <select name="locomative" class="form-select w-25" aria-label="Default select example">
+                                @foreach($locomative as $locomat)
+                                    <option value="{{$locomat->id}}">{{$locomat->locomativeNum  }}</option>
                                 @endforeach
                             </select>
 
                         <p class="text-muted">Локоматив</p>
-                        <select class="form-select w-25" aria-label="Default select example">
-                            @foreach($users as $user)
-                                <option value="{{$user->name}}">{{$user->name}}</option>
-                            @endforeach
-                        </select>
+
+                        <div style="display: inline-flex; position: relative">
+                                <div>
+                                    Водитель 1
+                                    <select name="driver1" class="form-select" aria-label="Default select example">
+                                        @foreach($users as $user)
+                                            <option value="{{$user->name}}">{{$user->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                               <div id="form1" style="display: none; margin-left: 20px">
+                                   Водитель 2
+                                   <select  name="driver2" class="form-select" aria-label="Default select example">
+                                       @foreach($users as $user)
+                                           <option value="{{$user->name}}">{{$user->name}}</option>
+                                       @endforeach
+                                   </select>
+                               </div>
 
 
+                            <div class="ml-3 pt-4"><button class="btn btn-outline-primary" type="button" onclick="hide(document.getElementById('form1'))">+</button>
 
+                        </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-2">
+                                <p class="text-muted mt-3">Станция` 1</p>
+                                <select name="station1_id" class="form-select" aria-label="Default select example">
+                                    @foreach($stations as $station)
+                                        <option value="{{$station->id}}">{{$station->stationName  }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <p class="text-muted mt-3">Станция 2</p>
+                                <select name="station2_id" class="form-select" aria-label="Default select example">
+                                    @foreach($stations as $station)
+                                        <option value="{{$station->id  }}">{{$station->stationName  }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-3" style="display: none" id="dep3">
+                                <p class="text-muted mt-3">Станция 3</p>
+                                <select class="form-select" aria-label="Default select example">
+                                    @foreach($stations as $station)
+                                        <option value="{{$station->id  }}">{{$station->stationName  }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                                <div class="col-md-1">
+                                    <p class="mt-3">Добавить</p>
+                                    <div class="ml-3"><button class="btn btn-outline-primary" type="button" onclick="hide(document.getElementById('dep3'))">+</button></div>
+                                </div>
+
+                        </div>
+
+
+                        <div class="row mt-3">
+
+                            <div class="col-md-3">
+                                Выход от станции 1
+                               <input name="st1deportTime" type="datetime-local" class="form-control">
+                            </div>
+
+                            <div class="col-md-3">
+                                Время приезда в станицю 2
+                                <input name="st2arriveTime" type="datetime-local" class="form-control">
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="form-control btn btn-primary mt-3 w-50">Передать</button>
                     </form>
+
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
@@ -87,3 +163,12 @@
     </div>
 </div>
 
+<script>
+    function hide(form) {
+        if (form.style.display == "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+</script>

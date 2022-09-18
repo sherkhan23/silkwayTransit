@@ -34,5 +34,5 @@ Route::middleware("guest:web")->group(function () {
 
 
 Route::any('/order',[\App\Http\Controllers\Paths::class, 'order'])->name('order');
-
+Route::post('/order_process',[\App\Http\Controllers\Paths::class, 'order_process'])->name('order_process');
 

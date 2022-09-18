@@ -29,6 +29,7 @@ return new class extends Migration
                 ->on('locomatives')
                 ->onDelete('cascade');
 
+
             $table->json('drivers_id')->nullable();
 
             $table->timestamps();
